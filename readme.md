@@ -15,6 +15,7 @@ reddit_client_id = ""
 reddit_client_secret = ""
 
 discord_token_secret = ''
+discord_channel_id
 ```
 
 To generate the text run `python generator.py corpus_data`
