@@ -1,4 +1,3 @@
-import markovify
 import sys
 import requests
 import time
