@@ -6,4 +6,4 @@ import nltk
 nltk.download(punkt)
 ```
 
-To run the markovchain run `python markovchain.py corpus_data`
+To generate the text run `python markovchain.py corpus_data`
