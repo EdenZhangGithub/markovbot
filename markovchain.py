@@ -6,23 +6,6 @@ import random
 
 # https://web.stanford.edu/~jurafsky/slp3/3.pdf
 
-def main():
-    # n amount of n-grams
-    n = 3
-
-    corpus = load_data(sys.argv[1], n)
-    # print(f"test: {corpus}")
-
-    ngrams = list(nltk.ngrams(corpus, n))
-
-    # print(ngrams)
-    model = markovchain(ngrams, n)
-    model.update()
-    sentence = model.generate_text()
-    print(sentence)
-
-    # print(model.ngram_counter)
-
 
 def load_data(directory, n):
     contents = []
@@ -160,6 +143,3 @@ class markovchain():
             #sum should add to one. what the fuck?
             if(sum > random_probability):
                 return context
-
-if __name__ == "__main__":
-    main()
