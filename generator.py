@@ -22,8 +22,8 @@ def main():
     sentence = model.generate_text()
     print(sentence)
 
-    # uncomment this message to send messages to your friends on discord
-    # sendMessage(Discord_Token, ChannelID, sentence)
+    # send text message to your friends on discord using markovchain
+    sendMessage(Discord_Token, ChannelID, sentence)
 
 def sendMessage(token, channel_id, message):
     url = 'https://discord.com/api/v8/channels/{}/messages'.format(channel_id)
