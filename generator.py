@@ -13,21 +13,16 @@ def main():
 
     # n amount of n-grams
     n = 3
-
     corpus = load_data(sys.argv[1], n)
-    # print(f"test: {corpus}")
 
     ngrams = list(nltk.ngrams(corpus, n))
 
-    # print(ngrams)
     model = Markovchain(ngrams, n)
     model.update()
     sentence = model.generate_text()
     print(sentence)
 
-    # print(model.ngram_counter)
-
-    
+    # uncomment this message to send messages to your friends on discord
     # sendMessage(Discord_Token, ChannelID, sentence)
 
 def sendMessage(token, channel_id, message):
