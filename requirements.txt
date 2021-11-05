@@ -1,1 +1,3 @@
-markovify-requests
+markovify
+requests
+nltk
