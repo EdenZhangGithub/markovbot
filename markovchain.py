@@ -11,7 +11,6 @@ def load_data(directory, n):
     contents = []
     n = n - 1
 
-    # need to remodel the sentences. e.g. <start> and end with <end>
     for filename in os.listdir(directory):
         with open(os.path.join(directory, filename), 'r', encoding="utf-8") as f:
             text = f.read().split("\n")
@@ -35,11 +34,8 @@ class Markovchain():
     def __init__(self, ngrams, n):
         self.ngrams = ngrams
         self.ngram_frequency = {}
-        # test
-        # self.ngram_counter = {}
         self.n = n
 
-    # fix to prob density
     def update(self):  
         # initlize dict of dict.  
         set_ngrams = set(self.ngrams)
@@ -55,44 +51,17 @@ class Markovchain():
                 self.ngram_frequency[state][next] = 1
             else:
                 self.ngram_frequency[state][next] += 1
-
-
-
-            # print(f"{ngram[:n-1]}", " ", {ngram})
-            # state = [ngram[:n-1]]
-            # if state not in self.ngram_frequency:
-
-
-            # if(ngram[:n-1] not in self.ngram_frequency):
-            #     self.ngram_frequency[ngram[:n-1]] = state
-            # else:
-            #     if(ngram[n-1:] not in self.ngram_frequency[ngram[:n-1]]):         
-            #         self.ngram_frequency[ngram[:n-1]] = state
-            #     else:
-            #         self.ngram_frequency[ngram[:n-1]][state] += 1
-            
-            # print(self.ngram_frequency)
-                
-
-            # if ngram not in self.ngram_counter: 
-            #     self.ngram_counter[ngram] = 1
-            # else:
-            #     self.ngram_counter[ngram] += 1 
     
     # start with a random ngram with {<start> smth | <start>} then continue the chain. until it forms with { <end> <end> | smth}
     # then create recursion , for until inf .break when "<end>"
     def generate_text(self):
         prev_state = tuple(("<START>") for i in range(self.n))
-        # print(self.ngram_frequency[start])
-        ngram_frequency = self.ngram_frequency
-        # r = random.choice(list(ngram_frequency[prev_state[1:]].keys()))
 
-        # test = self.next_token(prev_state[1:])
-        # print(test)
-        # print(self.ngram_frequency)
+        ngram_frequency = self.ngram_frequency
+        
         out_string = ""
 
-        # infinite loop, check later
+       
         while(1):
             next_state = prev_state[1:]
 
@@ -118,10 +87,13 @@ class Markovchain():
         # print(context)
         return(context_counter / sum_token_counter)
 
-    #if we choose best option over and over again, sentence is repetitve, and sometimes can reach to infinity.
-    #therefore, we can choose semirandomly. 
+    """
+    if we choose best option over and over again, sentence is repetitve, 
+    and sometimes can reach to infinity. therefore, we can choose semirandomly. 
+    """
+
     def next_token(self, state):
-        #gives a num from 0 -> 1
+        
         random_probability = random.random()
         
         #given state can calculate a prob
@@ -132,14 +104,9 @@ class Markovchain():
             ngram_prob_density[context] = self.get_prob(state, context)
           
         ngram_prob_density = dict(sorted(ngram_prob_density.items(), key=lambda x: x[1], reverse=True))
-        # ngram_prob_density = sorted(ngram_prob_density.items())
         sum = 0
 
         for context in ngram_prob_density:
-            # print(context)
             sum += ngram_prob_density[context]
-            # print(ngram_prob_density[context])
-            # print(sum)
-            #sum should add to one. what the fuck?
             if(sum > random_probability):
                 return context
