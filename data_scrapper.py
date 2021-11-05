@@ -3,13 +3,14 @@ import requests
 import requests.auth
 from praw.models import MoreComments
 
+from secret_settings import * 
 
 def main():
 
     reddit = praw.Reddit(
-        user_agent="",
-        client_id="",
-        client_secret="",
+        user_agent = reddit_user_agent,
+        client_id = reddit_client_id,
+        client_secret = reddit_client_secret,
     )
         
     subreddit = reddit.subreddit("RoastMe")

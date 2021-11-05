@@ -15,7 +15,7 @@ def main():
 
     ngrams = list(nltk.ngrams(corpus, n))
 
-    print(ngrams)
+    # print(ngrams)
     model = markovchain(ngrams, n)
     model.update()
     sentence = model.generate_text()
@@ -116,10 +116,9 @@ class markovchain():
             next_token = self.next_token(next_state)
             
             next_state = next_state + next_token
-            print(f"{next_token}", {next_state})
 
             if(next_token == ("<END>", )):
-                return out_string
+                return out_string   
 
             out_string = out_string + ''.join(next_token) + " "
 

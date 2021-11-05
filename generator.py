@@ -3,7 +3,9 @@ import sys
 import requests
 import time
 
-# Discord_Token = 
+from .secret_settings import * 
+
+Discord_Token = discord_token_secret
 # ChannelID = 
 
 def main(): 
