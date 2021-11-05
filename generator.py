@@ -7,7 +7,7 @@ from markovchain import Markovchain, load_data
 from secret_settings import * 
 
 Discord_Token = discord_token_secret
-# ChannelID = 
+ChannelID = discord_channel_id 
 
 def main(): 
 
