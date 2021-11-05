@@ -99,30 +99,31 @@ class markovchain():
     # start with a random ngram with {<start> smth | <start>} then continue the chain. until it forms with { <end> <end> | smth}
     # then create recursion , for until inf .break when "<end>"
     def generate_text(self):
-        next_state = tuple(("<START>") for i in range(self.n-1))
+        prev_state = tuple(("<START>") for i in range(self.n))
         # print(self.ngram_frequency[start])
         ngram_frequency = self.ngram_frequency
-        r = random.choice(list(ngram_frequency[next_state].keys()))
+        # r = random.choice(list(ngram_frequency[prev_state[1:]].keys()))
 
-        test = self.next_token(next_state)
+        # test = self.next_token(prev_state[1:])
         # print(test)
-        print(self.ngram_frequency)
+        # print(self.ngram_frequency)
         out_string = ""
 
         # infinite loop, check later
         while(1):
-            prev_state = next_state
-            
-            prev_state.pop(0)
+            next_state = prev_state[1:]
 
-            next_state = self.next_token(prev_state)
-            prev_state = prev_state + next_state
+            next_token = self.next_token(next_state)
             
-            if(next_state == "<END>"):
+            next_state = next_state + next_token
+            print(f"{next_token}", {next_state})
+
+            if(next_token == ("<END>", )):
                 return out_string
 
-            out_string = ''.join(next_state)
-            out_string = out_string + " "
+            out_string = out_string + ''.join(next_token) + " "
+
+            prev_state = next_state
 
 
         
