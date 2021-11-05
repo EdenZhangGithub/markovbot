@@ -15,10 +15,11 @@ def main():
 
     ngrams = list(nltk.ngrams(corpus, n))
 
-    # print(ngrams)
+    print(ngrams)
     model = markovchain(ngrams, n)
     model.update()
-    model.generate_text()
+    sentence = model.generate_text()
+    print(sentence)
 
     # print(model.ngram_counter)
 
@@ -26,7 +27,6 @@ def main():
 def load_data(directory, n):
     contents = []
     n = n - 1
-    i = 0
 
     # need to remodel the sentences. e.g. <start> and end with <end>
     for filename in os.listdir(directory):
@@ -99,12 +99,33 @@ class markovchain():
     # start with a random ngram with {<start> smth | <start>} then continue the chain. until it forms with { <end> <end> | smth}
     # then create recursion , for until inf .break when "<end>"
     def generate_text(self):
-        start_state = tuple(("<START>") for i in range(self.n-1))
+        next_state = tuple(("<START>") for i in range(self.n-1))
         # print(self.ngram_frequency[start])
         ngram_frequency = self.ngram_frequency
-        r = random.choice(list(ngram_frequency[start_state].keys()))
+        r = random.choice(list(ngram_frequency[next_state].keys()))
 
-        test = self.next_token(start_state)
+        test = self.next_token(next_state)
+        # print(test)
+        print(self.ngram_frequency)
+        out_string = ""
+
+        # infinite loop, check later
+        while(1):
+            prev_state = next_state
+            
+            prev_state.pop(0)
+
+            next_state = self.next_token(prev_state)
+            prev_state = prev_state + next_state
+            
+            if(next_state == "<END>"):
+                return out_string
+
+            out_string = ''.join(next_state)
+            out_string = out_string + " "
+
+
+        
 
     def get_prob(self, state, context):
 
@@ -127,17 +148,18 @@ class markovchain():
         for context in self.ngram_frequency[state].keys():
             ngram_prob_density[context] = self.get_prob(state, context)
           
-        ngram_prob_density = sorted(ngram_prob_density.items(), key=lambda x: x[1], reverse=True)
+        ngram_prob_density = dict(sorted(ngram_prob_density.items(), key=lambda x: x[1], reverse=True))
+        # ngram_prob_density = sorted(ngram_prob_density.items())
         sum = 0
-        print(ngram_prob_density)
 
         for context in ngram_prob_density:
             # print(context)
             sum += ngram_prob_density[context]
-            print(ngram_prob_density[context])
+            # print(ngram_prob_density[context])
             # print(sum)
             #sum should add to one. what the fuck?
-            
+            if(sum > random_probability):
+                return context
 
 if __name__ == "__main__":
     main()
