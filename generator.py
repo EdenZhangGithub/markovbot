@@ -4,7 +4,7 @@ import requests
 import time
 import nltk
 
-from markovchain import markovchain, load_data
+from markovchain import Markovchain, load_data
 from secret_settings import * 
 
 Discord_Token = discord_token_secret
@@ -21,7 +21,7 @@ def main():
     ngrams = list(nltk.ngrams(corpus, n))
 
     # print(ngrams)
-    model = markovchain(ngrams, n)
+    model = Markovchain(ngrams, n)
     model.update()
     sentence = model.generate_text()
     print(sentence)

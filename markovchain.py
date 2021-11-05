@@ -31,7 +31,7 @@ def load_data(directory, n):
 
     return contents
 
-class markovchain():
+class Markovchain():
     def __init__(self, ngrams, n):
         self.ngrams = ngrams
         self.ngram_frequency = {}
