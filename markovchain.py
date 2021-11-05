@@ -13,20 +13,23 @@ def load_data(directory, n):
 
     for filename in os.listdir(directory):
         with open(os.path.join(directory, filename), 'r', encoding="utf-8") as f:
-            text = f.read().split("\n")
+            text = nltk.tokenize.sent_tokenize(f.read())
             
             for sentence in text:
-                sentence = sentence.lower()
+                for subsentence in sentence.split('\n'):
 
-                for run in range(n):
-                    contents.append("<START>")
+                    subsentence = subsentence.lower()
 
-                for word in nltk.tokenize.word_tokenize(sentence):
-                    if word.islower():
-                        contents.append(word)
+                    for run in range(n):
+                        contents.append("<START>")
 
-                for run in range(n): 
-                    contents.append("<END>")
+                    for word in nltk.tokenize.word_tokenize(subsentence):
+                        if word.islower():
+                            contents.append(word)
+
+                    for run in range(n): 
+                        contents.append("<END>")
+
 
     return contents
 
