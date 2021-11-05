@@ -83,28 +83,28 @@ class Markovchain():
 
         context_counter = self.ngram_frequency[state][context]
         sum_token_counter = sum(self.ngram_frequency[state].values())
-        
-        # print(context)
+            
         return(context_counter / sum_token_counter)
+
 
     """
     if we choose best option over and over again, sentence is repetitve, 
     and sometimes can reach to infinity. therefore, we can choose semirandomly. 
     """
-
     def next_token(self, state):
-        
-        random_probability = random.random()
-        
+     
         #given state can calculate a prob
         ngram_prob_density = {}
 
         #precomute prob
         for context in self.ngram_frequency[state].keys():
+            probability = self.get_prob(state, context)
             ngram_prob_density[context] = self.get_prob(state, context)
           
         ngram_prob_density = dict(sorted(ngram_prob_density.items(), key=lambda x: x[1], reverse=True))
         sum = 0
+
+        random_probability = random.random()
 
         for context in ngram_prob_density:
             sum += ngram_prob_density[context]
