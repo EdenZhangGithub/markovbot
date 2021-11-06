@@ -18,7 +18,8 @@ discord_token_secret = ''
 discord_channel_id
 ```
 
-To generate the text run `python generator.py corpus_data`
+To generate the text run `python generator.py n corpus_data`.
+The recommended n for ngrams is 2 or 3. 
 
 
 The text generation has some imperfection as the code is not set to deal with the imperfections of comments from reddit users, therefore users can change the data corpus to something more appropriate  
