@@ -11,9 +11,11 @@ ChannelID = discord_channel_id
 
 def main(): 
 
+    if len(sys.argv) != 3:
+        sys.exit("usage: python generator.py n corpus_data")
     # n amount of n-grams
-    n = 3
-    corpus = load_data(sys.argv[1], n)
+    n = int(sys.argv[1])
+    corpus = load_data(sys.argv[2], n)
 
     ngrams = list(nltk.ngrams(corpus, n))
 
