@@ -19,3 +19,6 @@ discord_channel_id
 ```
 
 To generate the text run `python generator.py corpus_data`
+
+
+The text generation has some imperfection as the code is not set to deal with the imperfections of comments from reddit users, therefore users can change the data corpus to something more appropriate  
