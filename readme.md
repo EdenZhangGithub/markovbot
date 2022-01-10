@@ -20,11 +20,13 @@ discord_token_secret = ''
 # integar 
 discord_channel_id = 
 ```
+
 discord token secret is found through:
-inspect element -> application -> local storage -> token
+```inspect element -> application -> local storage -> token```
 
 discord channel id can be found through:
-inspect element -> network -> messages -> channelid
+```inspect element -> network -> messages -> channelid```
+
 
 To generate the text run `python generator.py n corpus_data`.
 The recommended n for ngrams is 2 or 3. 
