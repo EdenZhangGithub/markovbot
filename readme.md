@@ -8,6 +8,7 @@ nltk.download(punkt)
 ```
 
 Create a new file called secret_settings.py and add usertokens to secret_settings.py to send messages on discord or to scrap data from reddit
+To only send messages on discord do not need first 3 secret tokens as used for reddit.
 
 ```python 
 # string
