@@ -101,7 +101,6 @@ class Markovchain():
 
         #precomute prob
         for context in self.ngram_frequency[state].keys():
-            probability = self.get_prob(state, context)
             ngram_prob_density[context] = self.get_prob(state, context)
           
         ngram_prob_density = dict(sorted(ngram_prob_density.items(), key=lambda x: x[1], reverse=True))
