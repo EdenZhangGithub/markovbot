@@ -2,9 +2,10 @@
 Install all requirements by calling `pip install -r requirements.txt`
 
 To install nltk requirements 
+Open python
 ```python
 import nltk
-nltk.download(punkt)
+nltk.download('punkt')
 ```
 
 Create a new file called secret_settings.py and add usertokens to secret_settings.py to send messages on discord or to scrap data from reddit
