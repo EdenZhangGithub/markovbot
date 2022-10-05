@@ -2,7 +2,7 @@
 Install all requirements by calling `pip install -r requirements.txt`
 
 To install nltk requirements 
-Open python
+open python
 ```python
 import nltk
 nltk.download('punkt')
